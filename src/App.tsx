@@ -1,8 +1,8 @@
 import { Card } from "./componets/Card";
+import CreateContextModel from "./componets/CreateContextModel";
 import SideItem from "./componets/SideItem";
 import { Button } from "./componets/ui/Button";
 import { Logo } from "./icons/Logo";
-import { Papericons } from "./icons/Papericons";
 import { PlusIcons } from "./icons/Plusicons";
 import { Shareicons } from "./icons/Shareicons";
 import { Xicon } from "./icons/Xicon";
@@ -10,12 +10,13 @@ import { Xicon } from "./icons/Xicon";
 
 function App() {
   return (
-    <div className="bg-slate-200 h-screen flex gap-5">
+    <div className="bg-slate-200 min-h-screen h-full flex gap-5">
+      <CreateContextModel open={true} />
       <div className="w-72 bg-white">
         <SideItem text="Twitter" Icon={<Xicon />} />
         <SideItem text="Youtube" Icon={<Logo />} />
       </div>
-      <div>
+      <div className="w-full">
         <div className="flex justify-end p-4 gap-3">
           <Button
             text="Share Brain"
@@ -29,31 +30,36 @@ function App() {
             variants="primary"
           />
         </div>
-        <div className="flex gap-3 flex-wrap">
+        <div className="grid grid-cols-1  md:grid-cols-2 gap-4 lg:grid-cols-3 m-4">
           <Card
-            startIcons={<Papericons size="lg" />}
             title="Project"
-            content="the best way learn"
+            link="https://www.youtube.com/watch?v=itnKEOZfDBM"
+            type="youtube"
           />
           <Card
-            startIcons={<Papericons size="lg" />}
             title="Project"
-            content="the best way learn"
+            link="https://x.com/elonmusk/status/1812258574049157405"
+            type="twitter"
           />
           <Card
-            startIcons={<Papericons size="lg" />}
             title="Project"
-            content="the best way learn"
+            link="https://www.youtube.com/watch?v=itnKEOZfDBM"
+            type="youtube"
           />
           <Card
-            startIcons={<Papericons size="lg" />}
             title="Project"
-            content="the best way learn"
+            link="https://x.com/elonmusk/status/1812258574049157405"
+            type="twitter"
           />
           <Card
-            startIcons={<Papericons size="lg" />}
             title="Project"
-            content="the best way learn"
+            link="https://www.youtube.com/watch?v=itnKEOZfDBM"
+            type="youtube"
+          />
+          <Card
+            title="Project"
+            link="https://x.com/elonmusk/status/1812258574049157405"
+            type="twitter"
           />
         </div>
       </div>
