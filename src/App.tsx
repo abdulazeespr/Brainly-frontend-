@@ -1,24 +1,22 @@
 import { useState } from "react";
 import { Card } from "./componets/Card";
 import CreateContextModel from "./componets/CreateContextModel";
-import SideItem from "./componets/SideItem";
 import { Button } from "./componets/ui/Button";
-import { Logo } from "./icons/Logo";
 import { PlusIcons } from "./icons/Plusicons";
 import { Shareicons } from "./icons/Shareicons";
-import { Xicon } from "./icons/Xicon";
+import SideBar from "./componets/SideBar";
 // import Youtubeicons from "./icons/Youtubeicons";
 
 function App() {
   const [model,setModel] = useState(false)
   return (
-    <div className="bg-slate-200 min-h-screen h-full flex gap-5">
+    <div className="bg-slate-200 min-h-screen h-full flex ">
       <CreateContextModel open={model}  onClose={()=>setModel(false)}/>
 
-      <div className="w-72 bg-white">
-        <SideItem text="Twitter" Icon={<Xicon />} />
-        <SideItem text="Youtube" Icon={<Logo />} />
-      </div>
+      <SideBar/>
+
+    
+
       <div className="w-full">
         <div className="flex justify-end p-4 gap-3">
           <Button

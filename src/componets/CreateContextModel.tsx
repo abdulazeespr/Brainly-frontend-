@@ -1,10 +1,10 @@
-import  { useState } from 'react'
+
 import Crossicon from '../icons/Crossicon'
 import { Button } from './ui/Button'
 
 const CreateContextModel = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
 
-const [modelOpen,setModelOpen] = useState(false)
+
 
   return (
     <div>
