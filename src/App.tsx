@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card } from "./componets/Card";
 import CreateContextModel from "./componets/CreateContextModel";
 import SideItem from "./componets/SideItem";
@@ -9,9 +10,11 @@ import { Xicon } from "./icons/Xicon";
 // import Youtubeicons from "./icons/Youtubeicons";
 
 function App() {
+  const [model,setModel] = useState(false)
   return (
     <div className="bg-slate-200 min-h-screen h-full flex gap-5">
-      <CreateContextModel open={true} />
+      <CreateContextModel open={model}  onClose={()=>setModel(false)}/>
+
       <div className="w-72 bg-white">
         <SideItem text="Twitter" Icon={<Xicon />} />
         <SideItem text="Youtube" Icon={<Logo />} />
@@ -28,6 +31,7 @@ function App() {
             text="Add Content"
             startIcons={<PlusIcons size="lg" />}
             variants="primary"
+            onClick={()=>setModel(true)}
           />
         </div>
         <div className="grid grid-cols-1  md:grid-cols-2 gap-4 lg:grid-cols-3 m-4">

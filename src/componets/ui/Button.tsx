@@ -4,6 +4,7 @@ interface ButtonProps {
     text :string;
     startIcons?: ReactElement;
     variants : "primary" | "secondary";
+    onClick?:()=>void;
 }
 
 
@@ -19,7 +20,7 @@ export const Button = (props:ButtonProps)=>{
 
 
     return <>
-        <button className={` ${variantStyle[props.variants]}  ${defaultStyle}`}>
+        <button className={` ${variantStyle[props.variants]}  ${defaultStyle}`} onClick={props.onClick}>
             <div className="flex items-center justify-center">
             {props.startIcons}
             <div className="pl-2 pr-2">
