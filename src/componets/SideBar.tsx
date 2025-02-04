@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Logo } from '../icons/Logo'
 import SideItem from './SideItem'
 import { Xicon } from '../icons/Xicon'

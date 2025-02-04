@@ -5,6 +5,8 @@ interface ButtonProps {
     startIcons?: ReactElement;
     variants : "primary" | "secondary";
     onClick?:()=>void;
+    width?:boolean;
+    loading?:boolean;
 }
 
 
@@ -20,7 +22,7 @@ export const Button = (props:ButtonProps)=>{
 
 
     return <>
-        <button className={` ${variantStyle[props.variants]}  ${defaultStyle}`} onClick={props.onClick}>
+        <button className={` ${variantStyle[props.variants]}  ${defaultStyle} ${props.width ?  "w-full": ""} ${props.loading ? "opacity-50 cursor-not-allowed" : ""}`} onClick={props.onClick}>
             <div className="flex items-center justify-center">
             {props.startIcons}
             <div className="pl-2 pr-2">
