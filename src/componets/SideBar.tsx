@@ -2,7 +2,7 @@
 import { Logo } from '../icons/Logo'
 import SideItem from './SideItem'
 import { Xicon } from '../icons/Xicon'
-import Youtubeicons from '../icons/Youtubeicons'
+import { Youtubeicons }from '../icons/Youtubeicons'
 
 const SideBar = () => {
   return (

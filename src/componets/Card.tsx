@@ -1,43 +1,87 @@
 import { Papericons } from "../icons/Papericons";
 import { Shareicons } from "../icons/Shareicons";
 import { Deleteicons } from "../icons/Deleteicons";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 interface CardProps {
   title: string;
   link: string;
   type: "twitter" | "youtube";
+  className?: string;
+  id: string;
 }
 
-export const Card = (props: CardProps) => {
+
+
+
+
+export const Card = ({ title, link, type, className = "" ,id}: CardProps) => {
+
+  const navigate = useNavigate();
+  const deleteContent = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/signin");
+      return;
+    }
+
+    try {
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/contentdelete`
+      await axios.delete(url, {
+        data: {
+          contentId: id
+        },
+        headers: { Authorization: token }
+      });
+
+
+      
+      alert("Content deleted successfully");
+      window.location.reload();
+    } catch (error) {
+      alert("Failed to delete content. Please try again.");
+      console.error("Failed to delete content:", error);
+    }
+  }
+
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this content?")) {
+      deleteContent();
+    }
+  }
+
   return (
-    <div className="rounded-md bg-white shadow-md outline-slate-200 w-80 h-auto border overflow-hidden">
-      <div className="flex px-3 py-6  justify-between">
-        <div className="flex ">
-          <span className="text-slate-500">
+    <div className={`rounded-xl bg-white shadow-md w-full border ${className}`}>
+      <div className="flex px-4 py-5 justify-between items-center border-b border-slate-100">
+        <div className="flex items-center space-x-3">
+          <span className="text-slate-500 hover:text-slate-600 transition-colors">
             <Papericons size="lg" />
           </span>
-          <div className="pl-3 pr-3">
-            <h1>{props.title}</h1>
-          </div>
+          <h3 className="font-medium text-slate-900 line-clamp-1">
+            {title}
+          </h3>
         </div>
 
-        <div className="flex items-center">
-          <div>
-            <a href={props.link} target="_blank">
-            <Shareicons size="lg" />
+        <div className="flex items-center space-x-4">
+          <button className="text-slate-500 hover:text-slate-600 transition-colors">
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              <Shareicons size="lg" />
             </a>
-           </div>
-          <div className="pl-3 pr-2">
+          </button>
+          <button 
+            className="text-slate-500 hover:text-slate-600 transition-colors"
+            onClick={handleDelete}
+          >
             <Deleteicons size="lg" />
-          </div>
+          </button>
         </div>
       </div>
 
-      <div className="p-3 h-[calc(100%-88px)] overflow-hidden">
-        {props.type === "youtube" && (
+      <div className="p-4 h-[calc(100%-88px)] overflow-hidden">
+        {type === "youtube" && (
           <iframe
-            className="w-full h-full"
-            src={props.link.replace("watch?v=","embed/")}
+            className="w-full h-full rounded-lg"
+            src={link.replace("watch?v=", "embed/")}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -45,10 +89,10 @@ export const Card = (props: CardProps) => {
           ></iframe>
         )}
 
-        {props.type === "twitter" && (
+        {type === "twitter" && (
           <div className="h-full">
             <blockquote className="twitter-tweet" data-dnt="true">
-              <a href={props.link.replace("x.com","twitter.com")}></a>
+              <a href={link.replace("x.com", "twitter.com")}></a>
             </blockquote>
           </div>
         )}

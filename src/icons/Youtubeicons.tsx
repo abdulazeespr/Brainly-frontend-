@@ -1,4 +1,4 @@
-const Youtubeicons = () => {
+export const Youtubeicons = () => {
   return (
     <div>
       <svg
@@ -16,4 +16,4 @@ const Youtubeicons = () => {
   );
 };
 
-export default Youtubeicons;
+

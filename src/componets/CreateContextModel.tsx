@@ -3,7 +3,15 @@ import Crossicon from '../icons/Crossicon'
 import { Button } from './ui/Button'
 import  InputField  from './ui/InputField'
 import { useRef } from 'react'
-const CreateContextModel = ({open,onClose}:{open:boolean,onClose:()=>void}) => {
+const CreateContextModel = ({
+  open,
+  onClose,
+  onSuccess
+}:{
+  open: boolean,
+  onClose: () => void,
+  onSuccess: () => void
+}) => {
 
 const titleRef = useRef<HTMLInputElement>(null)
 const linkRef = useRef<HTMLInputElement>(null)
@@ -15,14 +23,20 @@ const addContext = async() => {
   const type = typeRef.current?.value
   const token = localStorage.getItem("token")
 
-
   if(title && link && type){
-    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/content`,{title,link,type},{headers:{Authorization:token}})
-    if(response.status === 200){
-      onClose()
-      alert("Context added successfully")
-    }else{
-      alert("Context added failed")
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/content`,
+        {title, link, type},
+        {headers:{Authorization:token}}
+      )
+      if(response.status === 200){
+        onSuccess()
+        window.location.reload();
+        onClose()
+      }
+    } catch (error) {
+      alert("Failed to add context")
     }
   }
 }
